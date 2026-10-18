@@ -4,7 +4,9 @@
 class CascadeIQError(Exception):
     """Base error for all CascadeIQ exceptions."""
 
-    def __init__(self, message: str, details: dict[str, str | float | int | None] | None = None) -> None:
+    def __init__(
+        self, message: str, details: dict[str, str | float | int | None] | None = None
+    ) -> None:
         super().__init__(message)
         self.message = message
         self.details = details or {}
@@ -12,6 +14,7 @@ class CascadeIQError(Exception):
 
 class GraphValidationError(CascadeIQError):
     """Base error for graph validation failures."""
+
     pass
 
 
@@ -43,8 +46,9 @@ class ValueOutOfRangeError(GraphValidationError):
     """Raised when a probability, strength, or damage parameter is outside [0.0, 1.0]."""
 
     def __init__(self, field_name: str, value: float, entity_id: str) -> None:
+        msg = f"Value {value} for '{field_name}' on '{entity_id}' is outside [0.0, 1.0]."
         super().__init__(
-            f"Value {value} for '{field_name}' on '{entity_id}' is outside the valid range [0.0, 1.0].",
+            msg,
             {"field": field_name, "value": value, "entity_id": entity_id},
         )
         self.field_name = field_name
@@ -65,6 +69,7 @@ class SelfLoopError(GraphValidationError):
 
 class ScenarioError(CascadeIQError):
     """Raised when a simulation scenario contains invalid references or parameters."""
+
     pass
 
 
