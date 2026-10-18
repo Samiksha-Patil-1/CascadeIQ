@@ -13,6 +13,6 @@ Phase 10 Demo and polish: [x]
 Phase 11 Docs and ship: [x]
 
 Metrics log (date, sim ms, MC ms, optimizer s, greedy gap, loss reduction):
-- 2026-10-18: Complete engine & UI build and debugging pass. 46 backend unit/golden/API tests green (100% pass). Frontend build & lint 100% green with 0 errors and 0 warnings. Fixed why() node telemetry, compare mitigated graph rendering, planner checklist deselection, and added service telemetry inspector (T8.4) with empty states.
+- 2026-10-18: Complete engine & UI build and debugging pass. 46 backend unit/golden/API tests green (100% pass). Frontend build & lint 100% green with 0 errors and 0 warnings. Fixed why() node telemetry, compare mitigated graph rendering, planner checklist deselection, and added service telemetry inspector (T8.4) with empty states. Live on Vercel: https://frontend-nu-eight-27.vercel.app
 
 Known issues: <none>
