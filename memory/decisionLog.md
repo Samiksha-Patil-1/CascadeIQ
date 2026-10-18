@@ -7,3 +7,5 @@ D-005 Revenue and users attach to capability nodes only, to prevent double count
 D-006 Common random numbers for baseline vs mitigated Monte Carlo comparisons.
 D-007 Timeline is computed server side and replayed client side; no websockets in v1.
 D-008 SQLite for v1; PostgreSQL only if multi-user is added.
+D-009 Compare endpoint returns `mitigated_graph` so frontend dynamically renders architectural changes (applied mitigations, severed cycle edges) side-by-side with baseline.
+D-010 Why-chain explainer returns consistent node telemetry across all discrete states (healthy, degraded, failed) to avoid frontend empty/undefined states.

@@ -184,7 +184,12 @@ export function PlannerView({
 
           {plan.length > 0 && (
             <button
-              onClick={() => onApplyPlan(plan.map((p) => p.item))}
+              onClick={() => {
+                const activeItems = plan
+                  .filter((p) => selectedItemIds[p.item.id] !== false)
+                  .map((p) => p.item);
+                onApplyPlan(activeItems);
+              }}
               className="mt-4 w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/20 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
             >
               <Play className="w-3.5 h-3.5 fill-current" />

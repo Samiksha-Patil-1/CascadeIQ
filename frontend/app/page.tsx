@@ -345,6 +345,22 @@ export default function HomePage() {
                   />
                 </div>
 
+                <div className="space-y-1">
+                  <div className="flex justify-between text-[11px] font-mono">
+                    <span className="text-[#9CA3AF]">Outage Duration:</span>
+                    <span className="font-bold text-amber-400">{outageMinutes} min</span>
+                  </div>
+                  <input
+                    type="range"
+                    min={5}
+                    max={120}
+                    step={5}
+                    value={outageMinutes}
+                    onChange={(e) => setOutageMinutes(parseInt(e.target.value, 10))}
+                    className="w-full h-1.5 bg-[#0B0F17] rounded-lg appearance-none cursor-pointer accent-amber-500"
+                  />
+                </div>
+
                 <button
                   onClick={() => handleRunSimulation()}
                   disabled={isSimulating}
@@ -379,6 +395,7 @@ export default function HomePage() {
             </div>
             <StructurePanel
               structure={structure}
+              selectedNode={graph?.nodes.find((n) => n.id === selectedNodeId) || null}
               onFocusNode={handleSelectNode}
             />
           </div>
@@ -394,7 +411,7 @@ export default function HomePage() {
             setActiveTab("sim");
             handleRunSimulation(nodeId);
           }}
-          isLoading={false}
+          isLoading={rankings.length === 0}
         />
       )}
 

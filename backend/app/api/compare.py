@@ -94,6 +94,7 @@ def compare_runs(graph_id: str, request: CompareRequest) -> dict[str, Any]:
             "timeline": format_timeline(mit_sim),
             "summary": mit_summary,
         },
+        "mitigated_graph": mit_graph.model_dump(),
         "delta": delta,
         "plan_cost": plan_cost,
     }

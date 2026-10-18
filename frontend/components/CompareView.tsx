@@ -11,6 +11,7 @@ interface CompareViewProps {
   compareData: {
     baseline: any;
     mitigated: any;
+    mitigated_graph?: GraphModel;
     delta: any;
     plan_cost: number;
   } | null;
@@ -129,7 +130,7 @@ export function CompareView({
             </span>
           </div>
           <div className="flex-1 relative">
-            <GraphCanvas graph={graph} simulatedNodes={mitNodes} />
+            <GraphCanvas graph={compareData.mitigated_graph || graph} simulatedNodes={mitNodes} />
           </div>
         </div>
       </div>

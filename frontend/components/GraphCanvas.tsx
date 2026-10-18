@@ -24,6 +24,11 @@ export function GraphCanvas({
 }: GraphCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<cytoscape.Core | null>(null);
+  const onSelectNodeRef = useRef(onSelectNode);
+
+  useEffect(() => {
+    onSelectNodeRef.current = onSelectNode;
+  }, [onSelectNode]);
 
   useEffect(() => {
     if (!containerRef.current || !graph) return;
@@ -183,9 +188,7 @@ export function GraphCanvas({
 
     cy.on("tap", "node", (evt) => {
       const nodeId = evt.target.id();
-      if (onSelectNode) {
-        onSelectNode(nodeId);
-      }
+      onSelectNodeRef.current?.(nodeId);
     });
 
     cyRef.current = cy;
@@ -193,6 +196,9 @@ export function GraphCanvas({
     return () => {
       cy.destroy();
     };
+    // Layout is only computed when the graph model or layout type changes;
+    // node health, damages, active edges, and selection are updated dynamically below.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [graph, layoutType]);
 
   // Update node colors and edge states dynamically without re-laying out

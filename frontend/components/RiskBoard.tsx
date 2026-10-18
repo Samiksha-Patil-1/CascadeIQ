@@ -39,6 +39,17 @@ export function RiskBoard({
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-6 p-6 max-w-7xl mx-auto w-full select-none">
+        <div className="p-8 rounded-2xl bg-[#121826] border border-[#1F2937] animate-pulse h-96 flex flex-col items-center justify-center gap-3 text-[#9CA3AF]">
+          <div className="w-8 h-8 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
+          <span className="text-xs font-mono">Running single-failure sweep across all system nodes...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-6 p-6 max-w-7xl mx-auto w-full select-none">
       {/* Header & Filter Controls */}

@@ -15,7 +15,7 @@ import heapq
 from collections import deque
 from typing import Any
 
-import networkx as nx  # type: ignore[import-untyped]
+import networkx as nx
 
 from app.engine.graph_io import IndexedGraph
 

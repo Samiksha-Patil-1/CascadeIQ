@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { X, AlertCircle, ArrowDown } from "lucide-react";
+import { X, AlertCircle, ArrowDown, CheckCircle2, AlertTriangle } from "lucide-react";
 
 interface WhyChainProps {
   whyData: {
@@ -31,19 +31,44 @@ interface WhyChainProps {
 export function WhyChainDrawer({ whyData, onClose, onFocusNode }: WhyChainProps) {
   if (!whyData) return null;
 
+  const isHealthy = whyData.state === "healthy" || whyData.damage <= 0.0;
+  const isFailed = whyData.state === "failed" || whyData.damage >= 0.6;
+  const isDegraded = !isHealthy && !isFailed;
+
   return (
     <div className="p-4 rounded-xl bg-[#121826] border border-[#1F2937] shadow-xl space-y-4 select-none">
       <div className="flex items-center justify-between pb-3 border-b border-[#1F2937]">
         <div className="flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-rose-400" />
-          <h3 className="text-sm font-bold text-white">Why Did {whyData.node_id} Fail?</h3>
+          {isHealthy && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+          {isDegraded && <AlertTriangle className="w-4 h-4 text-amber-400" />}
+          {isFailed && <AlertCircle className="w-4 h-4 text-rose-400" />}
+          <h3 className="text-sm font-bold text-white">
+            {isHealthy
+              ? `${whyData.node_id || "Node"} Status`
+              : isDegraded
+              ? `Why Did ${whyData.node_id} Degrade?`
+              : `Why Did ${whyData.node_id} Fail?`}
+          </h3>
         </div>
-        <button
-          onClick={onClose}
-          className="p-1 rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
-        >
-          <X className="w-4 h-4" />
-        </button>
+        <div className="flex items-center gap-2">
+          <span
+            className={`text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold ${
+              isHealthy
+                ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                : isDegraded
+                ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
+                : "bg-rose-500/20 text-rose-400 border border-rose-500/30"
+            }`}
+          >
+            {whyData.state} ({(whyData.damage * 100).toFixed(0)}%)
+          </span>
+          <button
+            onClick={onClose}
+            className="p-1 rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
       {/* Narrative Card */}

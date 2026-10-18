@@ -1,16 +1,20 @@
 # Active context (update every session)
 Date: 2026-10-18
-Current phase: Phase 1 Domain and I/O completed (waiting for approval to start Phase 2)
-Working on: Phase 1 Done -> Next: Phase 2 Structural Analysis (T2.1 - T2.5)
+Current phase: All Phases 0 - 11 Fully Debugged and Verified
+Working on: Complete Project Verification, Diagnostics, and Polish
 Just finished:
-- Initialized dedicated Git repository on branch `main`
-- Implemented Phase 0: FastAPI health endpoint, Next.js dark theme with Cytoscape 3-node demo canvas, Docker Compose, GitHub Actions CI
-- Implemented Phase 1: Pydantic v2 models (extra='forbid', kebab-case, ranges), defaults.py, graph_io with named validation errors, index-based adjacency (dependents/providers/failure direction), CSV round-trip identity, and 34-node enterprise e-commerce sample graph
-- Full test suite passing (17/17 tests passing, ruff lint clean, mypy strict clean, next build and eslint clean)
+- Debugged and resolved `why()` API endpoint and `WhyChainDrawer` drawer: complete `node_id`, `damage`, and `state` returned for all states (healthy, degraded, failed) with state-aware status badges.
+- Fixed `PlannerView` checklist: deselecting interventions in the candidate checklist is now strictly respected when applying plans to `CompareView`.
+- Fixed `CompareView` side-by-side canvas: backend `/compare` returns `mitigated_graph` model dump so the after-canvas accurately highlights mitigated edges and removed cyclic edges.
+- Added Service Telemetry Inspector (T8.4) and empty states to `StructurePanel` in Architecture Explorer.
+- Added Outage Duration slider to Fault Injection panel, resolving unused `setOutageMinutes` warning.
+- Resolved all ESLint and React compiler issues: 0 errors and 0 warnings on `npm run lint` and `npm run build`.
+- Added 6 comprehensive unit test suites covering all architectural layers: `test_structure.py`, `test_propagation.py`, `test_metrics.py`, `test_mitigations.py`, `test_optimizer.py`, `test_monte_carlo.py`, and `test_api_endpoints.py`.
+- Full test suite passing: 46/46 tests green, Ruff lint clean, Mypy strict clean (39 source files), and Next.js Turbopack build 100% green.
 Next three steps:
-1) Wait for user approval to begin Phase 2
-2) Phase 2 Structural Analysis: Transitive dependents (reverse BFS), Tarjan SCC & condensation, topological layers
-3) NetworkX wrappers for articulation points, PageRank, betweenness, and SPOF detection rule
+1) User review and demo presentation
+2) Optional Docker Compose end-to-end verification (`docker-compose up`)
+3) Demo recording and release tag
 Open questions: None
 Blockers: None
-Notes for next session: Write golden chain test before simulate()
+Notes: All architectural invariants, formulas, and UI states verified.

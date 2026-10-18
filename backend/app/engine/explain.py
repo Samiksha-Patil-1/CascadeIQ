@@ -19,14 +19,24 @@ def why(result: SimulationResult, target_node_id: str, graph: Graph) -> dict[str
     """
     indexed = IndexedGraph(graph)
     if target_node_id not in result.nodes:
-        return {"chain": [], "narrative": "Node not found in simulation result."}
+        return {
+            "node_id": target_node_id,
+            "damage": 0.0,
+            "state": "healthy",
+            "chain": [],
+            "top_contributors": [],
+            "narrative": "Node not found in simulation result.",
+        }
 
     target_sim = result.nodes[target_node_id]
     if target_sim.damage <= 0.0:
         return {
+            "node_id": target_node_id,
+            "damage": 0.0,
+            "state": target_sim.state.value,
             "chain": [],
-            "narrative": f"Node '{target_node_id}' remained healthy with 0.0 damage.",
             "top_contributors": [],
+            "narrative": f"Node '{target_node_id}' remained healthy with 0.0 damage.",
         }
 
     # Trace parent edge backwards
